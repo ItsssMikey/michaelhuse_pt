@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kundehistorier • Michael Huse PT</title>
+  <meta name="description" content="Kundehistorier, resultater og eksempler på oppfølging." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+
+  <!-- Bruk samme stil som index -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Liten side-spesifikk styling -->
+  <style>
+    .pageHero{
+      padding: 48px 0 22px;
+      background: linear-gradient(to bottom, rgba(111,143,141,.12), rgba(111,143,141,0));
+      border-bottom: 1px solid var(--border);
+    }
+    .pageHero h1{
+      margin:0 0 10px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 650;
+      letter-spacing:.02em;
+    }
+    .pageHero .lead{max-width: 70ch; margin:0; color: var(--muted);}
+
+    .filters{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 16px;
+    }
+    .chip{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      cursor:pointer;
+      font-weight:600;
+      opacity:.9;
+    }
+    .chip:hover{opacity:1}
+    .chip.isActive{
+      background: rgba(111,143,141,.12);
+      border-color: rgba(25,40,40,.18);
+    }
+
+    .caseCard{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+    }
+    .caseMedia{
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid var(--border);
+      background: #fff;
+      aspect-ratio: 16/9;
+      display:grid;
+      place-items:center;
+      color: var(--muted);
+      font-weight:600;
+    }
+    .caseMeta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .pillTag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(111,143,141,.08);
+      font-weight:600;
+      color: rgba(25,40,40,.9);
+      font-size:.92rem;
+    }
+    .caseTitle{
+      margin: 0;
+      font-size:1.15rem;
+      font-weight:700;
+    }
+    .caseText{margin:0; color: var(--muted); line-height:1.7;}
+    .caseGrid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 16px;
+    }
+    @media (max-width: 900px){
+      .caseGrid{grid-template-columns: 1fr;}
+    }
+
+    /* Modal */
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      z-index:100;
+    }
+    .modal.isOpen{display:block}
+    .modal__backdrop{
+      position:absolute; inset:0;
+      background: rgba(0,0,0,.45);
+    }
+    .modal__panel{
+      position:relative;
+      width:min(860px, 92vw);
+      margin: 7vh auto;
+      background:#fff;
+      border-radius: 18px;
+      border:1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+      overflow:hidden;
+    }
+    .modal__top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:14px 16px;
+      border-bottom:1px solid var(--border);
+      background: rgba(111,143,141,.08);
+    }
+    .modal__close{
+      width:42px;height:42px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#fff;
+      cursor:pointer;
+      font-size:20px;
+      line-height:1;
+    }
+    .modal__body{
+      padding:16px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      align-items:start;
+    }
+    .modal__media{
+      border-radius:18px;
+      border:1px solid var(--border);
+      overflow:hidden;
+      background:#fff;
+      aspect-ratio: 4/3;
+      display:grid;
+      place-items:center;
+      color:var(--muted);
+      font-weight:600;
+    }
+    @media (max-width: 900px){
+      .modal__body{grid-template-columns:1fr}
+    }
+    .kv{
+      display:grid;
+      gap:10px;
+    }
+    .kv .row{
+      display:grid;
+      grid-template-columns: 140px 1fr;
+      gap:10px;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+    }
+    .kv .k{font-weight:700; color: rgba(25,40,40,.9);}
+    .kv .v{color: var(--muted); line-height:1.6;}
+    .ctaBar{
+      padding:14px 16px;
+      border-top:1px solid var(--border);
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      background:#fff;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- (Hvis du har topstrip på index og vil ha samme her, kopier topstrip hit) -->
+  <header class="header" id="top">
+    <div class="container header__inner">
+      <a class="brand" href="index.html" aria-label="Hjem">
+        <span class="brand__name">MICHAEL HUSE</span><span class="brand__sub">PT</span>
+      </a>
+
+      <button class="navbtn" id="navBtn" aria-label="Åpne meny" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav" id="nav">
+        <a href="index.html">Hjem</a>
+        <a href="programs.html">Programmer</a>
+        <a href="cases.html" aria-current="page">Kundehistorier</a>
+        <a href="shop.html">Shop</a>
+        <a href="about.html">Om meg</a>
+        <a href="index.html#booking">Booking</a>
+        <a class="pill" href="wheel.html">Spin the Wheel</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="pageHero">
+      <div class="container">
+        <h1>Kundehistorier</h1>
+        <p class="lead">
+          Eksempler på hvordan vi jobber: konkrete mål, realistiske rammer og progresjon som varer.
+          Klikk på en historie for detaljer.
+        </p>
+
+        <div class="filters" aria-label="Filtrering">
+          <button class="chip isActive" data-filter="all" type="button">Alle</button>
+          <button class="chip" data-filter="styrke" type="button">Styrke</button>
+          <button class="chip" data-filter="vekttap" type="button">Vektnedgang</button>
+          <button class="chip" data-filter="smertefri" type="button">Smertefri</button>
+          <button class="chip" data-filter="kondis" type="button">Kondis</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Historier</h2>
+          <p class="muted">Dette er demo-innhold. Bytt tekst og bilder etter hvert.</p>
+        </div>
+
+        <div class="caseGrid" id="caseGrid">
+          <!-- Cards rendres av JS -->
+        </div>
+
+        <div class="note" style="margin-top:16px;">
+          <strong>Vil du bli neste case?</strong> Book en tid så lager vi en plan.
+          <a class="linkbtn" href="index.html#booking" style="margin-left:10px;">Gå til booking</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer med kontakt -->
+    <footer class="footer" id="contact">
+      <div class="container footer__inner">
+        <p class="muted">© <span id="year"></span> Michael Huse. Alle rettigheter reservert.</p>
+        <div class="footer__links">
+          <a href="index.html#booking">Booking</a>
+          <a href="mailto:you@domain.com">you@domain.com</a>
+          <a href="https://instagram.com/DITTBRUKERNAVN" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal__backdrop" data-close="true"></div>
+    <div class="modal__panel" role="document">
+      <div class="modal__top">
+        <div>
+          <strong id="modalTitle">Kundehistorie</strong>
+          <div class="muted small" id="modalSubtitle"></div>
+        </div>
+        <button class="modal__close" type="button" aria-label="Lukk" data-close="true">×</button>
+      </div>
+
+      <div class="modal__body">
+        <div class="modal__media" id="modalMedia">Bilde/video her</div>
+
+        <div class="kv" id="modalKv"></div>
+      </div>
+
+      <div class="ctaBar">
+        <a class="btn" href="index.html#booking">Book en time</a>
+        <button class="btn btn--ghost" type="button" data-close="true">Lukk</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Mobile nav ---
+    const navBtn = document.getElementById("navBtn");
+    const nav = document.getElementById("nav");
+    navBtn?.addEventListener("click", () => {
+      const open = nav.classList.toggle("isOpen");
+      navBtn.setAttribute("aria-expanded", String(open));
+    });
+    nav?.addEventListener("click", (e) => {
+      if (e.target.tagName === "A") {
+        nav.classList.remove("isOpen");
+        navBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    // --- Year ---
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // --- Demo data ---
+    const cases = [
+      {
+        id: "case1",
+        tag: "styrke",
+        title: "Fra sporadisk trening til struktur (8 uker)",
+        subtitle: "Mål: mer styrke + mer energi i hverdagen",
+        highlights: {
+          "Utgangspunkt": "Trent litt her og der, ingen progresjon.",
+          "Fokus": "Knebøy/markløft + enkel plan 3 økter/uke.",
+          "Hva vi endret": "Volumstyring, teknikk-video, korte check-ins.",
+          "Resultat": "Mer stabil trening + tydelig styrkeprogresjon."
+        }
+      },
+      {
+        id: "case2",
+        tag: "smertefri",
+        title: "Smertefri rygg med smartere belastning",
+        subtitle: "Mål: trene uten å trigge rygg/nakke",
+        highlights: {
+          "Utgangspunkt": "Stiv rygg, vondt etter jobb + trening.",
+          "Fokus": "Hofte/rygg-kontroll, tempo, progressiv opptrapping.",
+          "Hva vi endret": "Bedre oppvarming + mindre 'ego'-load.",
+          "Resultat": "Mindre smerte, mer kontroll, bedre toleranse."
+        }
+      },
+      {
+        id: "case3",
+        tag: "kondis",
+        title: "Bedre kondis uten å kræsje styrken",
+        subtitle: "Mål: bedre form + holde styrke",
+        highlights: {
+          "Utgangspunkt": "Litt for mye løping -> slitne bein.",
+          "Fokus": "2 korte intervalløkter + 3 styrkeøkter.",
+          "Hva vi endret": "Riktig intensitet + bedre restitusjon.",
+          "Resultat": "Bedre kapasitet + jevnere overskudd."
+        }
+      },
+      {
+        id: "case4",
+        tag: "vekttap",
+        title: "Vektnedgang med vaner som varer",
+        subtitle: "Mål: ned i fettprosent uten ekstremdiett",
+        highlights: {
+          "Utgangspunkt": "Jojo, lite plan og mye stress.",
+          "Fokus": "Protein, skritt, 3 styrkeøkter/uke.",
+          "Hva vi endret": "Enkle rutiner + ukentlig justering.",
+          "Resultat": "Stabil nedgang + mer kontroll."
+        }
+      }
+    ];
+
+    const grid = document.getElementById("caseGrid");
+    const modal = document.getElementById("modal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalSubtitle = document.getElementById("modalSubtitle");
+    const modalKv = document.getElementById("modalKv");
+
+    let activeFilter = "all";
+
+    function render(){
+      grid.innerHTML = cases
+        .filter(c => activeFilter === "all" ? true : c.tag === activeFilter)
+        .map(c => `
+          <article class="card caseCard" data-open="${c.id}">
+            <div class="caseMedia">Legg inn bilde: assets/cases/${c.id}.jpg</div>
+            <div class="caseMeta">
+              <span class="pillTag">${labelFor(c.tag)}</span>
+              <span class="muted small">${c.subtitle}</span>
+            </div>
+            <h3 class="caseTitle">${c.title}</h3>
+            <p class="caseText">Klikk for å se fokus, plan og hva som endret seg.</p>
+            <span class="linkbtn" style="margin-top:6px;">Se detaljer →</span>
+          </article>
+        `).join("");
+    }
+
+    function labelFor(tag){
+      return ({
+        styrke: "Styrke",
+        vekttap: "Vektnedgang",
+        smertefri: "Smertefri",
+        kondis: "Kondis",
+      })[tag] || tag;
+    }
+
+    function openModal(caseId){
+      const c = cases.find(x => x.id === caseId);
+      if(!c) return;
+
+      modalTitle.textContent = c.title;
+      modalSubtitle.textContent = c.subtitle;
+
+      modalKv.innerHTML = Object.entries(c.highlights).map(([k,v]) => `
+        <div class="row">
+          <div class="k">${k}</div>
+          <div class="v">${v}</div>
+        </div>
+      `).join("");
+
+      modal.classList.add("isOpen");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal(){
+      modal.classList.remove("isOpen");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    document.addEventListener("click", (e) => {
+      const openBtn = e.target.closest("[data-open]");
+      if(openBtn) openModal(openBtn.getAttribute("data-open"));
+
+      const closeBtn = e.target.closest("[data-close]");
+      if(closeBtn) closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") closeModal();
+    });
+
+    // Filters
+    document.querySelectorAll("[data-filter]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        activeFilter = btn.getAttribute("data-filter");
+        document.querySelectorAll(".chip").forEach(x => x.classList.remove("isActive"));
+        btn.classList.add("isActive");
+        render();
+      });
+    });
+
+    render();
+  </script>
+
+      <!-- Footer -->
+  <footer class="siteFooter" id="footer">
+    <div class="container footerGrid">
+
+      <div class="footerCol footerBrand">
+        <div class="footerLogo">
+          <span class="brand__name">MICHAEL HUSE</span><span class="brand__sub">PT</span>
+        </div>
+
+        <p class="footerText">
+          For nyheter, refleksjoner og treningsinnsikt – meld deg på:
+        </p>
+
+        <form class="footerForm" id="newsletterForm">
+          <label class="srOnly" for="footerEmail">E-post</label>
+          <input id="footerEmail" type="email" placeholder="E-post" required />
+          <button type="submit">Send</button>
+        </form>
+
+        <p class="footerCopy">© <span id="year"></span> Michael Huse</p>
+      </div>
+
+      <div class="footerCol">
+        <h4>MENY</h4>
+        <ul>
+          <li><a href="#services">Tjenester</a></li>
+          <li><a href="#cases">Kundecaser</a></li>
+          <li><a href="#about">Om meg</a></li>
+          <li><a href="wheel.html">Spin the Wheel</a></li>
+          <li><a href="#booking">Booking</a></li>
+          <li><a href="#">Vilkår</a></li>
+        </ul>
+      </div>
+
+      <div class="footerCol">
+        <h4>RESSURSER</h4>
+        <ul>
+          <li><a href="wheel.html">Treningsutfordringer</a></li>
+          <li><a href="programs.html">Treningsprogrammer</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="cases.html">Kundehistorier</a></li>
+        </ul>
+      </div>
+
+      <div class="footerCol">
+        <h4>SOSIALT</h4>
+        <ul>
+          <li><a href="https://instagram.com/DITTBRUKERNAVN" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://tiktok.com/@DITTBRUKERNAVN" target="_blank" rel="noopener">TikTok</a></li>
+          <li><a href="mailto:michael@dittdomene.no">E-post</a></li>
+        </ul>
+
+        <div class="mapMini">
+          <iframe
+            title="Google Maps"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Oslo&output=embed"></iframe>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+</body>
+</html>

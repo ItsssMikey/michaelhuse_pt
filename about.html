@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Om meg • Michael Huse PT</title>
+  <meta name="description" content="Om meg, filosofi, bakgrunn og hvordan jeg jobber med kunder." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .pageHero{
+      padding: 48px 0 22px;
+      background: linear-gradient(to bottom, rgba(111,143,141,.12), rgba(111,143,141,0));
+      border-bottom: 1px solid var(--border);
+    }
+    .pageHero h1{
+      margin:0 0 10px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 650;
+      letter-spacing:.02em;
+    }
+    .pageHero .lead{max-width: 80ch; margin:0; color: var(--muted);}
+
+    .aboutLayout{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:16px;
+      align-items:start;
+    }
+    @media (max-width: 900px){
+      .aboutLayout{grid-template-columns:1fr}
+    }
+
+    .portrait{
+      border-radius: 22px;
+      overflow:hidden;
+      border:1px solid var(--border);
+      background:#fff;
+      aspect-ratio: 4/5;
+      display:grid;
+      place-items:center;
+      color: var(--muted);
+      font-weight:700;
+      box-shadow: var(--shadow);
+    }
+
+    .big{
+      font-size:1.05rem;
+      line-height:1.75;
+      color: var(--muted);
+      margin: 10px 0 0;
+    }
+
+    .statGrid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:12px;
+      margin-top: 12px;
+    }
+    .stat{
+      border:1px solid var(--border);
+      border-radius: 18px;
+      padding:12px;
+      background: rgba(111,143,141,.08);
+    }
+    .stat strong{display:block; font-size:1.1rem;}
+    .stat span{color:var(--muted);}
+
+    .timeline{
+      display:grid;
+      gap:12px;
+      margin-top: 12px;
+    }
+    .step{
+      border:1px solid var(--border);
+      border-radius: 18px;
+      padding:12px;
+      background:#fff;
+    }
+    .stepHead{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-bottom:6px;
+    }
+    .stepDot{
+      width:10px;height:10px;border-radius:999px;background: rgba(88,124,121,.95);
+    }
+    .step p{margin:0; color:var(--muted); line-height:1.7;}
+
+    .mapWrap{
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid var(--border);
+      background:#fff;
+    }
+    .mapWrap iframe{
+      width:100%;
+      height: 280px;
+      border:0;
+      display:block;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header" id="top">
+    <div class="container header__inner">
+      <a class="brand" href="index.html" aria-label="Hjem">
+        <span class="brand__name">MICHAEL HUSE</span><span class="brand__sub">PT</span>
+      </a>
+
+      <button class="navbtn" id="navBtn" aria-label="Åpne meny" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav" id="nav">
+        <a href="index.html">Hjem</a>
+        <a href="programs.html">Programmer</a>
+        <a href="cases.html">Kundehistorier</a>
+        <a href="shop.html">Shop</a>
+        <a href="about.html" aria-current="page">Om meg</a>
+        <a href="index.html#booking">Booking</a>
+        <a class="pill" href="wheel.html">Spin the Wheel</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="pageHero">
+      <div class="container">
+        <h1>Om meg</h1>
+        <p class="lead">
+          Jeg hjelper travle folk bli sterke, atletiske og “pain-resilient” uten å leve i gymmen.
+          Strukturerte planer, tydelig progresjon, og null bullshit.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container aboutLayout">
+        <div>
+          <div class="portrait">Legg inn bilde: assets/portrait.jpg</div>
+          <p class="big">
+            <strong>Hei, jeg er Michael.</strong> (Skriv din ekte intro her.)<br/>
+            Jeg kombinerer styrketrening, bevegelseskvalitet og smarte vaner slik at du får resultater som varer —
+            uten at det tar over livet.
+          </p>
+
+          <div class="statGrid">
+            <div class="stat">
+              <strong>Fokus</strong>
+              <span>Styrke, muskel, prestasjon</span>
+            </div>
+            <div class="stat">
+              <strong>Stil</strong>
+              <span>Enkelt + konsekvent</span>
+            </div>
+            <div class="stat">
+              <strong>Oppfølging</strong>
+              <span>Video + check-ins</span>
+            </div>
+            <div class="stat">
+              <strong>Sted</strong>
+              <span>Oslo + Online</span>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:16px;">
+            <h2 style="margin:0 0 8px;">Filosofi</h2>
+            <p class="muted" style="margin:0; line-height:1.7;">
+              1) Gjør det <strong>enkelt</strong> å møte opp.<br/>
+              2) Bygg <strong>progressivt</strong> (lite, men ofte).<br/>
+              3) Prioriter <strong>kvalitet</strong> og riktig dosering.<br/>
+              4) Resultater handler mer om <strong>konsistens</strong> enn “perfekt plan”.
+            </p>
+          </div>
+        </div>
+
+        <aside class="stack">
+          <div class="card">
+            <h2 style="margin:0 0 8px;">Slik jobber jeg</h2>
+            <div class="timeline">
+              <div class="step">
+                <div class="stepHead"><span class="stepDot"></span><strong>1) Kartlegging</strong></div>
+                <p>Mål, hverdag, skader/plager, utstyr, erfaring.</p>
+              </div>
+              <div class="step">
+                <div class="stepHead"><span class="stepDot"></span><strong>2) Plan</strong></div>
+                <p>En plan du faktisk kan følge – med klare progresjonsregler.</p>
+              </div>
+              <div class="step">
+                <div class="stepHead"><span class="stepDot"></span><strong>3) Oppfølging</strong></div>
+                <p>Check-ins, justeringer og teknikkfeedback når det trengs.</p>
+              </div>
+              <div class="step">
+                <div class="stepHead"><span class="stepDot"></span><strong>4) Resultater</strong></div>
+                <p>Målbar progresjon + bedre kapasitet i hverdagen.</p>
+              </div>
+            </div>
+
+            <div class="actions" style="margin-top:14px;">
+              <a class="btn" href="index.html#booking">Book en time</a>
+              <a class="btn btn--ghost" href="index.html#contact">Kontakt meg</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 style="margin:0 0 8px;">Hvor jeg holder til</h2>
+            <p class="muted" style="margin:0 0 10px;">
+              Bytt embed-lenken under (Google Maps → Del → Bygg inn kart).
+            </p>
+            <div class="mapWrap">
+              <iframe
+                title="Google Maps"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Oslo&output=embed">
+              </iframe>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 style="margin:0 0 8px;">Sosiale medier</h2>
+            <p class="muted" style="margin:0;">
+              Instagram: <a href="https://instagram.com/DITTBRUKERNAVN" target="_blank" rel="noopener">@DITTBRUKERNAVN</a><br/>
+              TikTok: <a href="https://tiktok.com/@DITTBRUKERNAVN" target="_blank" rel="noopener">@DITTBRUKERNAVN</a><br/>
+              YouTube: <a href="https://youtube.com/@DITTBRUKERNAVN" target="_blank" rel="noopener">@DITTBRUKERNAVN</a>
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+  <footer class="siteFooter" id="footer">
+    <div class="container footerGrid">
+
+      <div class="footerCol footerBrand">
+        <div class="footerLogo">
+          <span class="brand__name">MICHAEL HUSE</span><span class="brand__sub">PT</span>
+        </div>
+
+        <p class="footerText">
+          For nyheter, refleksjoner og treningsinnsikt – meld deg på:
+        </p>
+
+        <form class="footerForm" id="newsletterForm">
+          <label class="srOnly" for="footerEmail">E-post</label>
+          <input id="footerEmail" type="email" placeholder="E-post" required />
+          <button type="submit">Send</button>
+        </form>
+
+        <p class="footerCopy">© <span id="year"></span> Michael Huse</p>
+      </div>
+
+      <div class="footerCol">
+        <h4>MENY</h4>
+        <ul>
+          <li><a href="#services">Tjenester</a></li>
+          <li><a href="#cases">Kundecaser</a></li>
+          <li><a href="#about">Om meg</a></li>
+          <li><a href="wheel.html">Spin the Wheel</a></li>
+          <li><a href="#booking">Booking</a></li>
+          <li><a href="#">Vilkår</a></li>
+        </ul>
+      </div>
+
+      <div class="footerCol">
+        <h4>RESSURSER</h4>
+        <ul>
+          <li><a href="wheel.html">Treningsutfordringer</a></li>
+          <li><a href="programs.html">Treningsprogrammer</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="cases.html">Kundehistorier</a></li>
+        </ul>
+      </div>
+
+      <div class="footerCol">
+        <h4>SOSIALT</h4>
+        <ul>
+          <li><a href="https://instagram.com/DITTBRUKERNAVN" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://tiktok.com/@DITTBRUKERNAVN" target="_blank" rel="noopener">TikTok</a></li>
+          <li><a href="mailto:michael@dittdomene.no">E-post</a></li>
+        </ul>
+
+        <div class="mapMini">
+          <iframe
+            title="Google Maps"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Oslo&output=embed"></iframe>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+  </main>
+
+  <script>
+    // Mobile nav
+    const navBtn = document.getElementById("navBtn");
+    const nav = document.getElementById("nav");
+    navBtn?.addEventListener("click", () => {
+      const open = nav.classList.toggle("isOpen");
+      navBtn.setAttribute("aria-expanded", String(open));
+    });
+    nav?.addEventListener("click", (e) => {
+      if (e.target.tagName === "A") {
+        nav.classList.remove("isOpen");
+        navBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

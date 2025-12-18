@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shop • Michael Huse PT</title>
+  <meta name="description" content="Shop: programmer, oppfølging og digitale ressurser." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .pageHero{
+      padding: 48px 0 22px;
+      background: linear-gradient(to bottom, rgba(111,143,141,.12), rgba(111,143,141,0));
+      border-bottom: 1px solid var(--border);
+    }
+    .pageHero h1{
+      margin:0 0 10px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 650;
+      letter-spacing:.02em;
+    }
+    .pageHero .lead{max-width: 75ch; margin:0; color: var(--muted);}
+
+    .shopLayout{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:16px;
+    }
+
+    .shopGrid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:16px;
+    }
+    @media (max-width: 900px){
+      .shopGrid{grid-template-columns: 1fr;}
+    }
+
+    .product{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .productMedia{
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid var(--border);
+      background:#fff;
+      aspect-ratio: 16/10;
+      display:grid;
+      place-items:center;
+      color: var(--muted);
+      font-weight:700;
+    }
+    .productTitle{
+      margin:0;
+      font-size:1.15rem;
+      font-weight:800;
+    }
+    .productDesc{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .productMeta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .metaPill{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      color: rgba(25,40,40,.9);
+      font-weight:650;
+      font-size:.9rem;
+    }
+    .priceRow{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:10px;
+      margin-top:4px;
+    }
+    .price{
+      font-weight:900;
+      font-size:1.2rem;
+      letter-spacing:.01em;
+    }
+
+    .productActions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:auto;
+    }
+    .btn--blockish{
+      flex: 1 1 180px;
+      text-align:center;
+      justify-content:center;
+    }
+
+    .banner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      padding:14px;
+      border-radius: 18px;
+      border:1px solid var(--border);
+      background: rgba(111,143,141,.10);
+    }
+    .banner strong{display:block; margin-bottom:2px;}
+    .banner p{margin:0; color:var(--muted);}
+  </style>
+</head>
+
+<body>
+  <header class="header" id="top">
+    <div class="container header__inner">
+      <a class="brand" href="index.html" aria-label="Hjem">
+        <span class="brand__name">MICHAEL HUSE</span><span class="brand__sub">PT</span>
+      </a>
+
+      <button class="navbtn" id="navBtn" aria-label="Åpne meny" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav" id="nav">
+        <a href="index.html">Hjem</a>
+        <a href="programs.html">Programmer</a>
+        <a href="cases.html">Kundehistorier</a>
+        <a href="shop.html" aria-current="page">Shop</a>
+        <a href="about.html">Om meg</a>
+        <a href="index.html#booking">Booking</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="pageHero">
+      <div class="container">
+        <h1>Shop</h1>
+        <p class="lead">
+          Her kan du kjøpe programmer og ressurser. Foreløpig demo — kobles enkelt til Stripe Payment Links / Shopify senere.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container shopLayout">
+        <div class="banner">
+          <div>
+            <strong>Vil du ha personlig oppfølging?</strong>
+            <p>Da er det ofte smartere å booke en time og få et program tilpasset deg.</p>
+          </div>
+          <a class="btn" href="index.html#booking">Book time</a>
+        </div>
+
+        <div class="section__head">
+          <h2>Produkter</h2>
+          <p class="muted">Bytt “Kjøp nå”-lenker til Stripe/Shopify når du er klar.</p>
+        </div>
+
+        <div class="shopGrid">
+          <!-- Produkt 1 -->
+          <article class="card product">
+            <div class="productMedia">Legg inn bilde: assets/shop/product-1.jpg</div>
+
+            <h3 class="productTitle">Sterkere på 8 uker</h3>
+            <p class="productDesc">3 økter/uke med tydelig progresjon. Perfekt hvis du vil ha struktur uten mas.</p>
+
+            <div class="productMeta">
+              <span class="metaPill">PDF/Sheet</span>
+              <span class="metaPill">8 uker</span>
+              <span class="metaPill">3 dager/uke</span>
+            </div>
+
+            <div class="priceRow">
+              <div class="price">kr 499</div>
+              <div class="muted small">digital levering</div>
+            </div>
+
+            <div class="productActions">
+              <a class="btn btn--block btn--blockish" href="#" onclick="return openBuy('Sterkere på 8 uker')">Kjøp nå</a>
+              <a class="btn btn--ghost btn--blockish" href="programs.html">Se detaljer</a>
+            </div>
+          </article>
+
+          <!-- Produkt 2 -->
+          <article class="card product">
+            <div class="productMedia">Legg inn bilde: assets/shop/product-2.jpg</div>
+
+            <h3 class="productTitle">Hypertrofi (muskelvekst)</h3>
+            <p class="productDesc">4 økter/uke. Smart volum, øvelsesbank og deload-strategi.</p>
+
+            <div class="productMeta">
+              <span class="metaPill">PDF/Notion</span>
+              <span class="metaPill">6–10 uker</span>
+              <span class="metaPill">4 dager/uke</span>
+            </div>
+
+            <div class="priceRow">
+              <div class="price">kr 599</div>
+              <div class="muted small">digital levering</div>
+            </div>
+
+            <div class="productActions">
+              <a class="btn btn--block btn--blockish" href="#" onclick="return openBuy('Hypertrofi')">Kjøp nå</a>
+              <a class="btn btn--ghost btn--blockish" href="programs.html">Se detaljer</a>
+            </div>
+          </article>
+
+          <!-- Produkt 3 -->
+          <article class="card product">
+            <div class="productMedia">Legg inn bilde: assets/shop/product-3.jpg</div>
+
+            <h3 class="productTitle">Smertefri & robust</h3>
+            <p class="productDesc">2–3 økter/uke. Mobilitet + styrke for å tåle mer i hverdagen.</p>
+
+            <div class="productMeta">
+              <span class="metaPill">PDF/Video</span>
+              <span class="metaPill">4–8 uker</span>
+              <span class="metaPill">2–3 dager/uke</span>
+            </div>
+
+            <div class="priceRow">
+              <div class="price">kr 399</div>
+              <div class="muted small">digital levering</div>
+            </div>
+
+            <div class="productActions">
+              <a class="btn btn--block btn--blockish" href="#" onclick="return openBuy('Smertefri & robust')">Kjøp nå</a>
+              <a class="btn btn--ghost btn--blockish" href="programs.html">Se detaljer</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="note">
+          <strong>Tips:</strong> Vil du selge uten “butikk-system” først? Bruk Stripe Payment Links (ett produkt = én lenke). Da kan “Kjøp nå”-knappen bare peke til Stripe.
+        </div>
+      </div>
+    </section>
+
+      <!-- Footer -->
+  <footer class="siteFooter" id="footer">
+    <div class="container footerGrid">
+
+      <div class="footerCol footerBrand">
+        <div class="footerLogo">
+          <span class="brand__name">MICHAEL HUSE</span><span class="brand__sub">PT</span>
+        </div>
+
+        <p class="footerText">
+          For nyheter, refleksjoner og treningsinnsikt – meld deg på:
+        </p>
+
+        <form class="footerForm" id="newsletterForm">
+          <label class="srOnly" for="footerEmail">E-post</label>
+          <input id="footerEmail" type="email" placeholder="E-post" required />
+          <button type="submit">Send</button>
+        </form>
+
+        <p class="footerCopy">© <span id="year"></span> Michael Huse</p>
+      </div>
+
+      <div class="footerCol">
+        <h4>MENY</h4>
+        <ul>
+          <li><a href="#services">Tjenester</a></li>
+          <li><a href="#cases">Kundecaser</a></li>
+          <li><a href="#about">Om meg</a></li>
+          <li><a href="wheel.html">Spin the Wheel</a></li>
+          <li><a href="#booking">Booking</a></li>
+          <li><a href="#">Vilkår</a></li>
+        </ul>
+      </div>
+
+      <div class="footerCol">
+        <h4>RESSURSER</h4>
+        <ul>
+          <li><a href="wheel.html">Treningsutfordringer</a></li>
+          <li><a href="programs.html">Treningsprogrammer</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="cases.html">Kundehistorier</a></li>
+        </ul>
+      </div>
+
+      <div class="footerCol">
+        <h4>SOSIALT</h4>
+        <ul>
+          <li><a href="https://instagram.com/DITTBRUKERNAVN" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://tiktok.com/@DITTBRUKERNAVN" target="_blank" rel="noopener">TikTok</a></li>
+          <li><a href="mailto:michael@dittdomene.no">E-post</a></li>
+        </ul>
+
+        <div class="mapMini">
+          <iframe
+            title="Google Maps"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Oslo&output=embed"></iframe>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+  </main>
+
+  <script>
+    // Mobile nav
+    const navBtn = document.getElementById("navBtn");
+    const nav = document.getElementById("nav");
+    navBtn?.addEventListener("click", () => {
+      const open = nav.classList.toggle("isOpen");
+      navBtn.setAttribute("aria-expanded", String(open));
+    });
+    nav?.addEventListener("click", (e) => {
+      if (e.target.tagName === "A") {
+        nav.classList.remove("isOpen");
+        navBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Demo "buy" handler (replace with Stripe/Shopify link)
+    function openBuy(productName){
+      alert("Demo: Kjøp-lenke mangler.\n\nBytt denne knappen til Stripe Payment Link for: " + productName);
+      return false;
+    }
+  </script>
+  
+
+</body>
+</html>

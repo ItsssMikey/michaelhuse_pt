@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Treningsprogrammer • Michael Huse PT</title>
+  <meta name="description" content="Treningsprogrammer for styrke, muskelvekst og prestasjon – med tydelig progresjon." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .pageHero{
+      padding: 48px 0 22px;
+      background: linear-gradient(to bottom, rgba(111,143,141,.12), rgba(111,143,141,0));
+      border-bottom: 1px solid var(--border);
+    }
+    .pageHero h1{
+      margin:0 0 10px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 650;
+      letter-spacing:.02em;
+    }
+    .pageHero .lead{max-width: 75ch; margin:0; color: var(--muted);}
+
+    .programGrid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:16px;
+    }
+    @media (max-width: 900px){
+      .programGrid{grid-template-columns:1fr}
+    }
+
+    .programCard{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .programTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+    }
+    .programBadge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(111,143,141,.10);
+      font-weight:700;
+      color: rgba(25,40,40,.9);
+      font-size:.9rem;
+      white-space:nowrap;
+    }
+    .programTitle{
+      margin:0;
+      font-size:1.15rem;
+      font-weight:800;
+    }
+    .programDesc{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .programMeta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .metaPill{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      color: rgba(25,40,40,.9);
+      font-weight:650;
+      font-size:.9rem;
+    }
+    .priceRow{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:10px;
+      margin-top:4px;
+    }
+    .price{
+      font-weight:900;
+      font-size:1.2rem;
+      letter-spacing:.01em;
+    }
+    .smallMuted{
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    .programActions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:auto;
+    }
+    .btn--blockish{
+      flex: 1 1 180px;
+      text-align:center;
+      justify-content:center;
+    }
+
+    .compare{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      align-items:start;
+    }
+    @media (max-width: 900px){
+      .compare{grid-template-columns:1fr}
+    }
+    .faqBox details summary{
+      cursor:pointer;
+      font-weight:700;
+      margin:6px 0;
+    }
+    .faqBox details p{margin:8px 0 12px; color:var(--muted); line-height:1.7;}
+  </style>
+</head>
+
+<body>
+  <header class="header" id="top">
+    <div class="container header__inner">
+      <a class="brand" href="index.html" aria-label="Hjem">
+        <span class="brand__name">MICHAEL HUSE</span><span class="brand__sub">PT</span>
+      </a>
+
+      <button class="navbtn" id="navBtn" aria-label="Åpne meny" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav" id="nav">
+        <a href="index.html">Hjem</a>
+        <a href="programs.html" aria-current="page">Programmer</a>
+        <a href="cases.html">Kundehistorier</a>
+        <a href="shop.html">Shop</a>
+        <a href="about.html">Om meg</a>
+        <a href="index.html#booking">Booking</a>
+        <a class="pill" href="wheel.html">Spin the Wheel</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="pageHero">
+      <div class="container">
+        <h1>Treningsprogrammer</h1>
+        <p class="lead">
+          Ferdige programmer med tydelig progresjon. Velg et program du kan starte med i dag — eller book en time så tilpasser jeg det.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Velg et program</h2>
+          <p class="muted">Dette er demo. Bytt navn, pris og innhold. Du kan også selge via Stripe Payment Links senere.</p>
+        </div>
+
+        <div class="programGrid">
+          <!-- Program 1 -->
+          <article class="card programCard">
+            <div class="programTop">
+              <div>
+                <h3 class="programTitle">Sterkere på 8 uker</h3>
+                <p class="programDesc">3 økter/uke. Fokus på baseøvelser + progresjon du faktisk følger.</p>
+              </div>
+              <span class="programBadge">Styrke</span>
+            </div>
+
+            <div class="programMeta">
+              <span class="metaPill">3 dager/uke</span>
+              <span class="metaPill">8 uker</span>
+              <span class="metaPill">Nivå: Alle</span>
+            </div>
+
+            <div class="priceRow">
+              <div class="price">kr 499</div>
+              <div class="smallMuted">PDF / Notion / Google Sheet</div>
+            </div>
+
+            <ul class="list">
+              <li>Knebøy / mark / press</li>
+              <li>Enkle “min-krav” for travle uker</li>
+              <li>RPE + progresjonsregler</li>
+              <li>Oppvarming + teknikk-cues</li>
+            </ul>
+
+            <div class="programActions">
+              <a class="btn btn--block btn--blockish" href="index.html#contact">Spør om dette</a>
+              <a class="btn btn--ghost btn--blockish" href="index.html#booking">Book tilpasning</a>
+            </div>
+          </article>
+
+          <!-- Program 2 -->
+          <article class="card programCard">
+            <div class="programTop">
+              <div>
+                <h3 class="programTitle">Muskelvekst (Hypertrofi)</h3>
+                <p class="programDesc">4 økter/uke. Smart volum, pump, og bærekraftig progresjon.</p>
+              </div>
+              <span class="programBadge">Muskel</span>
+            </div>
+
+            <div class="programMeta">
+              <span class="metaPill">4 dager/uke</span>
+              <span class="metaPill">6–10 uker</span>
+              <span class="metaPill">Nivå: Viderekommen</span>
+            </div>
+
+            <div class="priceRow">
+              <div class="price">kr 599</div>
+              <div class="smallMuted">PDF / Notion / Google Sheet</div>
+            </div>
+
+            <ul class="list">
+              <li>Upper/lower split</li>
+              <li>Autoregulering (RIR/RPE)</li>
+              <li>Deload-strategi</li>
+              <li>Øvelsesbank + alternativer</li>
+            </ul>
+
+            <div class="programActions">
+              <a class="btn btn--block btn--blockish" href="index.html#contact">Spør om dette</a>
+              <a class="btn btn--ghost btn--blockish" href="index.html#booking">Book tilpasning</a>
+            </div>
+          </article>
+
+          <!-- Program 3 -->
+          <article class="card programCard">
+            <div class="programTop">
+              <div>
+                <h3 class="programTitle">Smertefri & robust</h3>
+                <p class="programDesc">2–3 økter/uke. Mobilitet + styrke for å tåle hverdagen bedre.</p>
+              </div>
+              <span class="programBadge">Smertefri</span>
+            </div>
+
+            <div class="programMeta">
+              <span class="metaPill">2–3 dager/uke</span>
+              <span class="metaPill">4–8 uker</span>
+              <span class="metaPill">Nivå: Alle</span>
+            </div>
+
+            <div class="priceRow">
+              <div class="price">kr 399</div>
+              <div class="smallMuted">PDF / Video-lenker</div>
+            </div>
+
+            <ul class="list">
+              <li>Skuldre / hofte / rygg</li>
+              <li>Tempo, kontroll og dosering</li>
+              <li>Skalerbare økter</li>
+              <li>Enkle daglige “reset”-rutiner</li>
+            </ul>
+
+            <div class="programActions">
+              <a class="btn btn--block btn--blockish" href="index.html#contact">Spør om dette</a>
+              <a class="btn btn--ghost btn--blockish" href="index.html#booking">Book tilpasning</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container compare">
+        <div class="card">
+          <h2>Vil du ha det personlig tilpasset?</h2>
+          <p class="muted">
+            Ferdige programmer fungerer bra — men det går raskere når vi justerer øvelser, belastning og volum etter kroppen din, mål og timeplan.
+          </p>
+
+          <div class="grid grid--3" style="margin-top:14px;">
+            <div class="card" style="box-shadow:none;">
+              <strong>Startnivå</strong>
+              <p class="muted">Vi matcher program til dine forutsetninger.</p>
+            </div>
+            <div class="card" style="box-shadow:none;">
+              <strong>Progress</strong>
+              <p class="muted">Riktige justeringer i riktig tempo.</p>
+            </div>
+            <div class="card" style="box-shadow:none;">
+              <strong>Feedback</strong>
+              <p class="muted">Teknikk + struktur som gjør det enkelt.</p>
+            </div>
+          </div>
+
+          <div class="actions" style="margin-top:14px;">
+            <a class="btn" href="index.html#booking">Book en time</a>
+            <a class="btn btn--ghost" href="index.html#contact">Spør først</a>
+          </div>
+        </div>
+
+        <aside class="card faqBox">
+          <h2 style="margin:0 0 8px;">FAQ</h2>
+          <details>
+            <summary>Hvordan får jeg programmet?</summary>
+            <p>PDF / Notion / Google Sheet (velg det som er enklest).</p>
+          </details>
+          <details>
+            <summary>Kan jeg trene hjemme?</summary>
+            <p>Ja. Jeg kan lage en “home version” med manualer/bånd.</p>
+          </details>
+          <details>
+            <summary>Hva hvis jeg ikke klarer 4 økter/uke?</summary>
+            <p>Da velger du 2–3 og vi gjør det enkelt og effektivt.</p>
+          </details>
+        </aside>
+      </div>
+    </section>
+
+
+      <!-- Footer -->
+  <footer class="siteFooter" id="footer">
+    <div class="container footerGrid">
+
+      <div class="footerCol footerBrand">
+        <div class="footerLogo">
+          <span class="brand__name">MICHAEL HUSE</span><span class="brand__sub">PT</span>
+        </div>
+
+        <p class="footerText">
+          For nyheter, refleksjoner og treningsinnsikt – meld deg på:
+        </p>
+
+        <form class="footerForm" id="newsletterForm">
+          <label class="srOnly" for="footerEmail">E-post</label>
+          <input id="footerEmail" type="email" placeholder="E-post" required />
+          <button type="submit">Send</button>
+        </form>
+
+        <p class="footerCopy">© <span id="year"></span> Michael Huse</p>
+      </div>
+
+      <div class="footerCol">
+        <h4>MENY</h4>
+        <ul>
+          <li><a href="#services">Tjenester</a></li>
+          <li><a href="#cases">Kundecaser</a></li>
+          <li><a href="#about">Om meg</a></li>
+          <li><a href="wheel.html">Spin the Wheel</a></li>
+          <li><a href="#booking">Booking</a></li>
+          <li><a href="#">Vilkår</a></li>
+        </ul>
+      </div>
+
+      <div class="footerCol">
+        <h4>RESSURSER</h4>
+        <ul>
+          <li><a href="wheel.html">Treningsutfordringer</a></li>
+          <li><a href="programs.html">Treningsprogrammer</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="cases.html">Kundehistorier</a></li>
+        </ul>
+      </div>
+
+      <div class="footerCol">
+        <h4>SOSIALT</h4>
+        <ul>
+          <li><a href="https://instagram.com/DITTBRUKERNAVN" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://tiktok.com/@DITTBRUKERNAVN" target="_blank" rel="noopener">TikTok</a></li>
+          <li><a href="mailto:michael@dittdomene.no">E-post</a></li>
+        </ul>
+
+        <div class="mapMini">
+          <iframe
+            title="Google Maps"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Oslo&output=embed"></iframe>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+  </main>
+
+  <script>
+    // Mobile nav
+    const navBtn = document.getElementById("navBtn");
+    const nav = document.getElementById("nav");
+    navBtn?.addEventListener("click", () => {
+      const open = nav.classList.toggle("isOpen");
+      navBtn.setAttribute("aria-expanded", String(open));
+    });
+    nav?.addEventListener("click", (e) => {
+      if (e.target.tagName === "A") {
+        nav.classList.remove("isOpen");
+        navBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  
+</body>
+</html>

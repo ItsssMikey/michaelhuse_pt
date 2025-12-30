@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Faste kunder • Michael Huse PT</title>
+  <meta name="description" content="Faste kunder: book ukens timer, praktisk info og FAQ." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* =========================
+       LOCAL STYLES (this page)
+       ========================= */
+
+    /* Bigger “glass wrap” inside hero */
+    .heroPanel{
+      padding: 24px;
+    }
+
+    .heroWrap{
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(30, 40, 40, .36);
+      box-shadow: 0 24px 70px rgba(0,0,0,.30);
+      backdrop-filter: blur(14px);
+      padding: 22px;
+    }
+
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.25fr .9fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .heroLeft .lead{
+      max-width: 58ch;
+      margin-bottom: 14px;
+    }
+
+    /* Right hub */
+    .welcomeCard{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+      padding: 18px;
+      height: 100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .welcomeCard h2{
+      margin:0 0 6px;
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing:.02em;
+    }
+    .welcomeCard p{
+      margin:0;
+      color: rgba(255,255,255,.90);
+      line-height:1.6;
+    }
+
+    .tinyRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 14px;
+    }
+
+    .smallPill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.92);
+      font-weight: 850;
+      text-decoration:none;
+      cursor:pointer;
+      white-space: nowrap;
+    }
+    .smallPill:hover{ opacity:.95; }
+
+    .smallPill--primary{
+      border: 1px solid rgba(255,255,255,.34);
+      background: rgba(255,255,255,.14);
+    }
+
+    .cancelNote{
+      font-size: .92rem;
+      margin: 10px 0 0;
+      color: rgba(255,255,255,.78);
+      line-height:1.5;
+    }
+
+    /* Section spacing a touch tighter + more “layout” */
+    .section{ padding: 56px 0; }
+
+    /* “Help” becomes a premium CTA band */
+    .helpBand{
+      margin-top: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 16px;
+    }
+
+    .helpText h3{
+      margin:0 0 6px;
+      font-size: 1.12rem;
+      font-weight: 900;
+    }
+    .helpText p{
+      margin:0;
+      color: var(--index);
+      line-height:1.7;
+    }
+    .helpMeta{
+      margin-top: 8px;
+      font-size:.92rem;
+      color: var(--index);
+      opacity:.95;
+    }
+
+    .helpActions{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      min-width: 320px;
+    }
+
+    .serviceLink{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:900;
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#fff;
+      color: rgba(25,40,40,.92);
+      opacity:.95;
+      white-space: nowrap;
+    }
+    .serviceLink:hover{ opacity:1; background: rgba(111,143,141,.08); }
+
+    /* One button gets a bit more “primary” feel */
+    .serviceLink--primary{
+      background: var(--cta);
+      color: var(--ctaText);
+      border: 1px solid rgba(0,0,0,.08);
+    }
+    .serviceLink--primary:hover{ background: var(--ctaHover); }
+
+    /* Practical + FAQ cards layout */
+    .twoCol{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 12px;
+    }
+    .tipList{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .faq details{
+      border:1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .faq summary{
+      cursor:pointer;
+      font-weight:850;
+      list-style:none;
+    }
+    .faq summary::-webkit-details-marker{ display:none; }
+    .faq details + details{ margin-top: 12px; }
+    .faq p{ margin: 10px 0 0; color: var(--muted); line-height:1.7; }
+
+    /* Responsive */
+    @media (max-width: 1024px){
+      .heroGrid{ grid-template-columns: 1fr; }
+      .helpBand{ flex-direction: column; align-items: stretch; }
+      .helpActions{ justify-content:flex-start; min-width: 0; }
+      .twoCol{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body class="pageBg">
+
+  <div class="topstrip">
+    <a class="topstrip__link" href="#praktisk">
+      <span class="dot" aria-hidden="true"></span>
+      Praktisk + FAQ (2 min)
+    </a>
+  </div>
+
+  <header class="header" id="top">
+    <div class="container header__inner">
+      <a class="brand" href="index.html#top" aria-label="Hjem">
+        <span class="brand__name">MICHAEL HUSE</span><span class="brand__sub">PT</span>
+      </a>
+
+      <button class="navbtn" id="navBtn" aria-label="Åpne meny" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav" id="nav">
+        <a href="#services">Planer</a>
+        <a href="cases.html">Kundehistorier</a>
+        <a href="#about">Om meg</a>
+        <a href="for">For faste kunder</a>
+        <a href="corp.html">Bedrift</a>
+        <a class="pill" href="#booking">BOOK TIME</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" aria-label="Kunde hero">
+      <div class="hero__media" aria-hidden="true"
+           style="background-image:url('assets/bedrift-header.jpeg'); /* ← BYTT HERO-BILDE HER */"></div>
+      <div class="hero__overlay" aria-hidden="true"></div>
+
+      <div class="container hero__content">
+        <div class="heroPanel">
+          <div class="heroWrap">
+
+            <div class="heroGrid">
+              <!-- LEFT -->
+              <div class="heroLeft">
+                <h1>
+                  Velkommen tilbake❤️  <span class="script">Ukens timer</span> er klare.
+                </h1>
+                <p class="lead">
+                  Book time på 10 sekunder. Praktisk info og snarveier så du får treningen gjort – uten stress.
+                </p>
+
+                <div class="hero__cta">
+                  <a class="btn btn--primaryHero" href="PASTE_GOOGLE_CALENDAR_LINK_HERE" target="_blank" style="color: #000;" rel="noopener">
+                    Bestill timer
+                  </a>
+                  <a class="btn btn--ghost" href="#praktisk">Praktisk info</a>
+                </div>
+
+                <p class="cancelNote">
+                  Tips: Book neste økt med én gang etter økten — det er den enkleste “hack’en”.
+                </p>
+              </div>
+
+              <!-- RIGHT -->
+              <aside class="welcomeCard" aria-label="Fast-kunde hub">
+                <div>
+                  <h2>Fast-kunde hub ✨</h2>
+                  <div class="tinyRow">
+                    <a class="smallPill" href="PASTE_GOOGLE_CALENDAR_LINK_HERE" target="_blank" rel="noopener">📅 Book nå</a>
+                    <a class="smallPill" href="#faq">💬 FAQ</a>
+                    <a class="smallPill" href="#praktisk">🧠 Praktisk</a>
+                  </div>
+
+                  <div class="tinyRow">
+                    <button class="smallPill smallPill--primary" id="addToHomeBtn" type="button">
+                      📲 Legg til på hjemskjerm
+                    </button>
+                     <p class="cancelNote" style="margin-top: 14px;">
+                  Legg siden på hjemskjermen så har du booking ett trykk unna.
+                </p>
+                  </div>
+                </div>
+
+            
+              </aside>
+            </div>
+
+          </div>
+
+          <!-- CTA band inside hero -->
+          <div class="helpBand" aria-label="Fant du ikke en tid som passer?">
+            <div class="helpText">
+              <h3>Fant du ikke en tid som passer?</h3>
+              <p>Send meg 2–3 forslag (dag + klokkeslett), så finner vi en løsning som funker.</p>
+              <div class="helpMeta">Avbestilling: 24t før, så får noen andre muligheten 💛</div>
+            </div>
+
+            <div class="helpActions">
+              <a class="serviceLink serviceLink--primary"
+                 href="mailto:michael@dittdomene.no?subject=Foresl%C3%A5%20tidspunkt%20-%20Fast%20kunde&body=Hei%20Michael%2C%0A%0AJeg%20%C3%B8nsker%20%C3%A5%20booke%20denne%20uka.%20Her%20er%202%E2%80%933%20forslag%3A%0A%0A1)%20%0A2)%20%0A3)%20%0A%0AHilsen%2C%0A">
+                Foreslå tidspunkt →
+              </a>
+              <a class="serviceLink" href="#praktisk">Les praktisk →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PRAKTISK -->
+    <section class="section section--alt" id="praktisk">
+      <div class="container">
+        <div class="section__head">
+          <h2>Praktisk</h2>
+          <p class="muted">Alt du trenger å vite – kort og greit.</p>
+        </div>
+
+        <div class="twoCol">
+          <article class="card">
+            <h3>Før du kommer</h3>
+            <ul class="tipList">
+              <li>Kom 10 min før og still oppvarmet</li>
+              <li>Spis noe lite om du trener tidlig</li>
+              <li>Si ifra om smerter/ting du vil unngå</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Etter økten</h3>
+            <ul class="tipList">
+              <li>Noter én ting som funket</li>
+              <li>Send meg 1 melding hvis noe kjentes rart</li>
+              <li>Book neste økt med én gang</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section__head">
+          <h2>FAQ</h2>
+          <p class="muted">De vanligste spørsmålene.</p>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>Kan jeg bytte time samme uke?</summary>
+            <p>Ja – book den nye tiden, og avbestill den gamle (24t avbestillingsfrist).</p>
+          </details>
+
+          <details>
+            <summary>Jeg er sliten – skal jeg droppe?</summary>
+            <p>Som regel: møt opp. Vi tilpasser økten. Kontinuitet er nøkkelen.</p>
+          </details>
+
+          <details>
+            <summary>Kan du legge ut flere tider?</summary>
+            <p>Ja – send meg hva som passer (morgen/ettermiddag), så tester vi flere slotter.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="siteFooter" id="footer">
+    <div class="container footerGrid">
+      <div class="footerCol footerBrand">
+        <div class="footerLogo">
+          MICHAEL HUSE<span style="opacity:.7">PT</span>
+        </div>
+        <p class="footerText">
+          Enkel booking, klar plan, og jevn progresjon.
+        </p>
+        <p class="footerCopy">© <span id="year"></span> Michael Huse</p>
+      </div>
+
+      <div class="footerCol">
+        <h4>SNARVEIER</h4>
+        <ul>
+          <li><a href="#praktisk">Praktisk</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="index.html">Til forsiden</a></li>
+        </ul>
+      </div>
+
+      <div class="footerCol">
+        <h4>KONTAKT</h4>
+        <ul>
+          <li><a href="mailto:michael@dittdomene.no">michael@dittdomene.no</a></li>
+          <li><a href="https://instagram.com/DITTBRUKERNAVN" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://tiktok.com/@DITTBRUKERNAVN" target="_blank" rel="noopener">TikTok</a></li>
+        </ul>
+      </div>
+
+      <div class="footerCol">
+        <h4>BOOKING</h4>
+        <ul>
+          <li><a href="PASTE_GOOGLE_CALENDAR_LINK_HERE" target="_blank" rel="noopener">Book nå</a></li>
+          <li><a href="mailto:michael@dittdomene.no?subject=Sp%C3%B8rsm%C3%A5l%20-%20Fast%20kunde">Spør meg</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile nav toggle
+    const navBtn = document.getElementById("navBtn");
+    const nav = document.getElementById("nav");
+    navBtn?.addEventListener("click", () => {
+      const open = nav.classList.toggle("isOpen");
+      navBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
+    // Add to home screen (best-effort helper)
+    const addBtn = document.getElementById("addToHomeBtn");
+    let deferredPrompt = null;
+
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      addBtn.style.display = "inline-flex";
+    });
+
+    addBtn?.addEventListener("click", async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+      } else {
+        alert("På iPhone: trykk Del (⬆︎) i Safari → 'Legg til på Hjem-skjerm'.\n\nPå Android/Chrome: meny → 'Legg til på startskjerm'.");
+      }
+    });
+  </script>
+</body>
+</html>

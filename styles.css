@@ -22,29 +22,31 @@
 
   --font: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   --serif: "Playfair Display", Georgia, serif;
+
+  /* Layout */
+  --topstrip-h: 44px;
 }
 
 *{ box-sizing:border-box }
-html{ scroll-behavior:smooth }
+html{
+  scroll-behavior:smooth;
+  background: var(--bg); /* hindrer hvit stripe ved overscroll/bounce */
+}
 body{
   margin:0;
   font-family:var(--font);
   background:var(--bg);
   color:var(--text);
-}
 
-.pageBg{
-  background:
-    radial-gradient(900px 520px at 15% 15%, rgba(111,143,141,.10), rgba(0,0,0,0) 60%),
-    radial-gradient(900px 520px at 85% 10%, rgba(111,143,141,.08), rgba(0,0,0,0) 55%),
-    #f6f7f8;
-  min-height:100vh;
+  /* gir plass til fixed topstrip */
+  padding-top: var(--topstrip-h);
 }
 
 a{ color:inherit; text-decoration:none }
 .container{ width:min(1120px, 92vw); margin:0 auto }
 .muted{ color:var(--muted) }
 .small{ font-size:.92rem }
+
 .srOnly{
   position:absolute!important;
   width:1px;height:1px;
@@ -55,11 +57,20 @@ a{ color:inherit; text-decoration:none }
   border:0;
 }
 
-/* ===== Top strip ===== */
+/* ===== Page background variant ===== */
+.pageBg{
+  background:
+    radial-gradient(900px 520px at 15% 15%, rgba(111,143,141,.10), rgba(0,0,0,0) 60%),
+    radial-gradient(900px 520px at 85% 10%, rgba(111,143,141,.08), rgba(0,0,0,0) 55%),
+    var(--bg);
+  min-height:100vh;
+}
+
+/* ===== Top strip (ONE source of truth) ===== */
 .topstrip{
-  position:sticky;
-  top:0;
-  z-index:50;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 2000;
   background:var(--brandBar);
   color:#fff;
   display:flex;
@@ -78,16 +89,27 @@ a{ color:inherit; text-decoration:none }
   border:1px solid rgba(255,255,255,.35);
   background: rgba(255,255,255,.08);
 }
-.dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.95);display:inline-block}
+.dot{
+  width:8px;height:8px;
+  border-radius:999px;
+  background:rgba(255,255,255,.95);
+  display:inline-block;
+}
 
 /* ===== Header / Nav ===== */
 .header{
-  position:sticky;
-  top:44px; /* under topstrip */
-  z-index:40;
+  position: sticky;
+  top: var(--topstrip-h);
+  z-index: 1500;
   background:var(--headerBg);
   border-bottom:1px solid var(--border);
 }
+
+/* hvis enkelte sider bruker header--flush */
+.header.header--flush{
+  top: var(--topstrip-h) !important;
+}
+
 .header__inner{
   display:flex;
   align-items:center;
@@ -95,6 +117,7 @@ a{ color:inherit; text-decoration:none }
   padding:14px 0;
   gap:16px;
 }
+
 .brand{
   display:flex;
   align-items:baseline;
@@ -120,7 +143,6 @@ a{ color:inherit; text-decoration:none }
   font-weight:700;
 }
 
-/* Mobile nav button */
 .navbtn{
   display:none;
   width:50px;height:42px;
@@ -136,6 +158,7 @@ a{ color:inherit; text-decoration:none }
   background:rgba(47, 49, 49, 0.7);
   border-radius:2px;
 }
+
 /* ===== Hero ===== */
 .hero{
   position:relative;
@@ -145,20 +168,30 @@ a{ color:inherit; text-decoration:none }
   overflow:hidden;
 }
 
+/* WIDE SCREEN HERO IMAGE */
 .hero__media{
   position:absolute;
   inset:0;
   background: url("assets/c2c2f4a1-fabc-4464-a991-61f47eaad670.jpg") center/cover no-repeat;
-  transform: scale(1.03);
   background-position: center 30%;
-  filter: saturate(.95) contrast(1.05);
+  transform: none;
+  filter: none;
 }
+
+/* PHONE HERO IMAGE */
+@media (max-width: 520px){
+  .hero__media{
+    background: url("assets/happyface.png") center/cover no-repeat;
+    background-position: center 30%;
+    transform: none;
+    filter: none;
+  }
+}
+
 .hero__overlay{
   position:absolute;
   inset:0;
-  background:
-    radial-gradient(900px 520px at 30% 45%, rgba(255,255,255,.20), rgba(0,0,0,0) 60%),
-    linear-gradient(to top, rgba(0,0,0,.58), rgba(0,0,0,.20));
+  background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.10));
 }
 
 .hero__content{
@@ -167,7 +200,6 @@ a{ color:inherit; text-decoration:none }
   color:#fff;
 }
 
-/* “Grå boks” som gjør tekst leselig */
 .heroPanel{
   width: min(760px, 92vw);
   padding: 28px 26px;
@@ -175,7 +207,6 @@ a{ color:inherit; text-decoration:none }
   background: rgba(30, 40, 40, .42);
   border: 1px solid rgba(255,255,255,.22);
   box-shadow: 0 24px 70px rgba(0,0,0,.35);
-  backdrop-filter: blur(14px);
 }
 
 .hero h1{
@@ -185,12 +216,7 @@ a{ color:inherit; text-decoration:none }
   letter-spacing:.04em;
   text-shadow: 0 10px 30px rgba(0,0,0,.55);
 }
-.script{
-  font-family:var(--serif);
-  font-style:italic;
-  font-weight:500;
-  letter-spacing:.02em;
-}
+
 .lead{
   max-width: 58ch;
   font-size:1.1rem;
@@ -198,7 +224,6 @@ a{ color:inherit; text-decoration:none }
   margin:0 0 22px;
 }
 
-/* Denne brukes i lyse seksjoner (så den ikke blir hvit) */
 .lead--dark{
   color: var(--text);
   opacity: .95;
@@ -216,7 +241,7 @@ a{ color:inherit; text-decoration:none }
   margin-top: 14px;
 }
 
-/* Buttons */
+/* ===== Buttons ===== */
 .btn{
   display:inline-flex;
   align-items:center;
@@ -241,7 +266,6 @@ a{ color:inherit; text-decoration:none }
 
 .btn--block{ width:100% }
 
-/* Lyse knapper for vanlige seksjoner */
 .btn--primary{
   background: var(--cta);
   border:1px solid rgba(0,0,0,.08);
@@ -257,6 +281,14 @@ a{ color:inherit; text-decoration:none }
   backdrop-filter: none;
 }
 .btn--light:hover{ background: rgba(111,143,141,.10) }
+
+.btn--primaryHero{
+  background: #d7d7d7;
+  border: 1px solid rgba(0,0,0,.08);
+  color: #fff;
+  backdrop-filter: none;
+}
+.btn--primaryHero:hover{ opacity:.95 }
 
 /* ===== Sections ===== */
 .section{ padding:72px 0; }
@@ -278,7 +310,6 @@ a{ color:inherit; text-decoration:none }
 }
 .section__head p{ margin:0; max-width:60ch }
 
-/* Cards / grids */
 .grid{ display:grid; gap:16px; }
 .grid--3{ grid-template-columns: repeat(3, minmax(0,1fr)); }
 
@@ -299,6 +330,7 @@ a{ color:inherit; text-decoration:none }
   background: rgba(111,143,141,.12);
   margin-bottom:10px;
 }
+
 .list{
   margin:0 0 16px;
   padding-left:18px;
@@ -306,7 +338,6 @@ a{ color:inherit; text-decoration:none }
   line-height:1.7;
 }
 
-/* Booking card */
 .bookingCard{
   text-align:center;
   max-width:520px;
@@ -346,7 +377,7 @@ a{ color:inherit; text-decoration:none }
   flex-wrap:wrap;
 }
 
-/* ===== Footer (text-basert) ===== */
+/* ===== Footer ===== */
 .siteFooter{
   background: #6f8f8d;
   color: #f5f7f6;
@@ -433,8 +464,14 @@ a{ color:inherit; text-decoration:none }
 }
 
 /* ================= RESPONSIVE ================= */
+
+/* 3 → 2 columns on tablet / small laptop */
+@media (max-width: 1024px){
+  .grid--3{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+/* nav + app/footer behavior */
 @media (max-width: 900px){
-  .grid--3{ grid-template-columns: 1fr; }
   .appGrid{ grid-template-columns: 1fr; gap:24px; }
 
   .navbtn{ display:block; }
@@ -459,19 +496,66 @@ a{ color:inherit; text-decoration:none }
   .siteFooter .footerGrid{ grid-template-columns: 1fr; gap: 32px; }
 }
 
-/* Mobile fixes */
+/* 2 → 1 column on phone */
+@media (max-width: 640px){
+  .grid--3{ grid-template-columns: 1fr; }
+}
+
+/* Mobile fixes + HERO phone layout */
 @media (max-width: 520px){
-  /* Ikke la topstrip dekke header/navbar */
-  .topstrip{
-    position: static;
-    padding: 8px 12px;
+  :root{ --topstrip-h: 40px; }
+
+  .topstrip{ padding: 8px 12px; }
+
+  .hero{
+    min-height: 80svh;
+    align-items: flex-end;
   }
-  .header{ top: 0; }
 
-  .hero__content{ padding: 44px 0 38px; }
-  .heroPanel{ padding: 20px 18px; border-radius: 18px; }
+  .hero__content{
+    padding: 0 0 34px;
+    width: 100%;
+  }
 
-  /* App screenshots: alltid 2 side-by-side og små */
+  .heroPanel{
+    width: 100%;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .hero h1{
+    margin: 0 0 10px;
+    font-size: 2.05rem;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    line-height: 1.05;
+  }
+
+  .hero .lead{
+    margin: 0 auto 16px;
+    font-size: .98rem;
+    line-height: 1.5;
+    max-width: 34ch;
+    color: rgba(255,255,255,.90);
+  }
+
+  .hero__cta{
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .hero__cta .btn--primaryHero{
+    padding: 12px 18px;
+    border-radius: 999px;
+  }
+
   .appImages{
     grid-template-columns: repeat(2, minmax(0,1fr));
     gap: 10px;
@@ -482,3 +566,107 @@ a{ color:inherit; text-decoration:none }
     border-radius: 14px;
   }
 }
+
+/* =========================
+   RYDDIGE SERVICE-KORT (KUN TJENESTER)
+   ========================= */
+
+/* sørger for jevn høyde og ryddig spacing uten å endre resten av grid-systemet ditt */
+.serviceGrid{
+  align-items: stretch;
+}
+
+/* bygger et “header / body / footer”-kort, så CTA alltid ligger pent nederst */
+.serviceCard{
+  display:flex;
+  flex-direction:column;
+  padding:18px;
+}
+
+/* liten toppseksjon med tydelig tittel */
+.serviceHead{
+  padding-bottom:10px;
+  border-bottom: 1px solid rgba(25,40,40,.08);
+  margin-bottom: 12px;
+}
+.serviceTitle{
+  margin:0;
+  font-size:1.05rem;
+  font-weight:800;
+  letter-spacing:.01em;
+}
+
+/* rydder lista: jevn linjehøyde + mindre “rot” */
+.serviceList{
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.serviceList li{
+  margin-bottom: 8px;
+}
+.serviceList li:last-child{
+  margin-bottom: 0;
+}
+
+/* CTA alltid nederst */
+.serviceFoot{
+  margin-top:auto;
+  padding-top:14px;
+}
+
+/* CTA: mer “knapp”, mer konsistent */
+.serviceCta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#fff;
+  font-weight:800;
+  color: rgba(25,40,40,.92);
+  transition: transform .12s ease, background .12s ease, opacity .12s ease;
+}
+.serviceCta:hover{
+  transform: translateY(-1px);
+  background: rgba(111,143,141,.08);
+}
+
+/* Featured: subtilt mer “løft”, men ikke ny stil for hele siden */
+.serviceCard--featured{
+  border-color: rgba(25,40,40,.18);
+  box-shadow: 0 14px 40px rgba(10, 20, 20, .10);
+  position: relative;
+}
+
+/* Populær badge – renere plassering */
+.serviceBadge{
+  position:absolute;
+  top: 14px;
+  right: 14px;
+  font-size:.78rem;
+  font-weight:900;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(25,40,40,.18);
+  background: rgba(111,143,141,.12);
+}
+
+/* Primary CTA på featured-kortet (bruker dine eksisterende brand-farger) */
+.serviceCta--primary{
+  background: var(--cta);
+  border: 1px solid rgba(0,0,0,.08);
+  color: var(--ctaText);
+}
+.serviceCta--primary:hover{
+  background: var(--ctaHover);
+}
+
+/* Litt bedre spacing når grid går til 2/1 kolonne (uten å endre dine breakpoints) */
+@media (max-width: 1024px){
+  .serviceBadge{ top: 12px; right: 12px; }
+}
+

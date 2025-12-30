@@ -10,11 +10,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 
-  <!-- Bruk samme stil som index -->
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- Liten side-spesifikk styling -->
   <style>
+    /* Navbar helt på toppen på denne siden */
+    .header.header--flush{ top: 0 !important; }
+
     .pageHero{
       padding: 48px 0 22px;
       background: linear-gradient(to bottom, rgba(111,143,141,.12), rgba(111,143,141,0));
@@ -28,43 +29,42 @@
     }
     .pageHero .lead{max-width: 70ch; margin:0; color: var(--muted);}
 
-    .filters{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top: 16px;
-    }
-    .chip{
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background:#fff;
-      cursor:pointer;
-      font-weight:600;
-      opacity:.9;
-    }
-    .chip:hover{opacity:1}
-    .chip.isActive{
-      background: rgba(111,143,141,.12);
-      border-color: rgba(25,40,40,.18);
-    }
-
     .caseCard{
       display:grid;
       grid-template-columns: 1fr;
       gap:12px;
     }
+
+    /* Kortet følger bildeformatet */
     .caseMedia{
       border-radius: 18px;
       overflow:hidden;
       border:1px solid var(--border);
       background: #fff;
-      aspect-ratio: 16/9;
-      display:grid;
-      place-items:center;
-      color: var(--muted);
-      font-weight:600;
+      position:relative;
+      display:block;
     }
+    .caseMedia img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+
+    .baToggle{
+      position:absolute;
+      bottom:10px;
+      right:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      font-weight:600;
+      cursor:pointer;
+      opacity:.95;
+      z-index:2;
+    }
+    .baToggle:hover{opacity:1}
+
     .caseMeta{
       display:flex;
       gap:10px;
@@ -89,6 +89,7 @@
       font-weight:700;
     }
     .caseText{margin:0; color: var(--muted); line-height:1.7;}
+
     .caseGrid{
       display:grid;
       grid-template-columns: repeat(3, minmax(0,1fr));
@@ -145,20 +146,41 @@
       gap:16px;
       align-items:start;
     }
+
+    /* Modal før/etter */
     .modal__media{
       border-radius:18px;
       border:1px solid var(--border);
       overflow:hidden;
       background:#fff;
-      aspect-ratio: 4/3;
-      display:grid;
-      place-items:center;
-      color:var(--muted);
-      font-weight:600;
+      padding:12px;
     }
+    .modalBA{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .modalBA figure{margin:0}
+    .modalBA img{
+      width:100%;
+      height:260px;
+      object-fit:cover;
+      border-radius:14px;
+      display:block;
+    }
+    .modalBA figcaption{
+      text-align:center;
+      margin-top:6px;
+      font-weight:600;
+      color:var(--muted);
+    }
+
     @media (max-width: 900px){
       .modal__body{grid-template-columns:1fr}
+      .modalBA{grid-template-columns:1fr}
+      .modalBA img{height:240px}
     }
+
     .kv{
       display:grid;
       gap:10px;
@@ -186,7 +208,14 @@
 </head>
 
 <body>
-  <!-- (Hvis du har topstrip på index og vil ha samme her, kopier topstrip hit) -->
+    <!-- Toppstripe -->
+  <div class="topstrip">
+    <a class="topstrip__link" href="#booking">
+      <span class="dot" aria-hidden="true"></span>
+      Book time direkte i kalenderen
+    </a>
+  </div>
+
   <header class="header" id="top">
     <div class="container header__inner">
       <a class="brand" href="index.html" aria-label="Hjem">
@@ -197,15 +226,16 @@
         <span></span><span></span><span></span>
       </button>
 
+
+   
       <nav class="nav" id="nav">
-        <a href="index.html">Hjem</a>
-        <a href="programs.html">Programmer</a>
-        <a href="cases.html" aria-current="page">Kundehistorier</a>
-        <a href="shop.html">Shop</a>
-        <a href="about.html">Om meg</a>
-        <a href="index.html#booking">Booking</a>
-        <a class="pill" href="wheel.html">Spin the Wheel</a>
+        <a href="#services">Planer</a>
+        <a href="/about.html">Kundehistorier</a>
+        <a href="#about">Artikler</a>
+        <a href="#about">Om meg</a>
+        <a class="pill" href="#booking">BOOK TIME</a>
       </nav>
+    </div>
     </div>
   </header>
 
@@ -217,14 +247,6 @@
           Eksempler på hvordan vi jobber: konkrete mål, realistiske rammer og progresjon som varer.
           Klikk på en historie for detaljer.
         </p>
-
-        <div class="filters" aria-label="Filtrering">
-          <button class="chip isActive" data-filter="all" type="button">Alle</button>
-          <button class="chip" data-filter="styrke" type="button">Styrke</button>
-          <button class="chip" data-filter="vekttap" type="button">Vektnedgang</button>
-          <button class="chip" data-filter="smertefri" type="button">Smertefri</button>
-          <button class="chip" data-filter="kondis" type="button">Kondis</button>
-        </div>
       </div>
     </section>
 
@@ -232,12 +254,10 @@
       <div class="container">
         <div class="section__head">
           <h2>Historier</h2>
-          <p class="muted">Dette er demo-innhold. Bytt tekst og bilder etter hvert.</p>
+        
         </div>
 
-        <div class="caseGrid" id="caseGrid">
-          <!-- Cards rendres av JS -->
-        </div>
+        <div class="caseGrid" id="caseGrid"></div>
 
         <div class="note" style="margin-top:16px;">
           <strong>Vil du bli neste case?</strong> Book en tid så lager vi en plan.
@@ -246,7 +266,6 @@
       </div>
     </section>
 
-    <!-- Footer med kontakt -->
     <footer class="footer" id="contact">
       <div class="container footer__inner">
         <p class="muted">© <span id="year"></span> Michael Huse. Alle rettigheter reservert.</p>
@@ -272,7 +291,18 @@
       </div>
 
       <div class="modal__body">
-        <div class="modal__media" id="modalMedia">Bilde/video her</div>
+        <div class="modal__media">
+          <div class="modalBA">
+            <figure>
+              <img id="modalBefore" alt="Før" />
+              <figcaption>Før</figcaption>
+            </figure>
+            <figure>
+              <img id="modalAfter" alt="Etter" />
+              <figcaption>Etter</figcaption>
+            </figure>
+          </div>
+        </div>
 
         <div class="kv" id="modalKv"></div>
       </div>
@@ -285,7 +315,7 @@
   </div>
 
   <script>
-    // --- Mobile nav ---
+    // Mobile nav
     const navBtn = document.getElementById("navBtn");
     const nav = document.getElementById("nav");
     navBtn?.addEventListener("click", () => {
@@ -299,16 +329,18 @@
       }
     });
 
-    // --- Year ---
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Year (du har to footere i prosjektet ditt – setter alle #year)
+    document.querySelectorAll("#year").forEach(el => el.textContent = new Date().getFullYear());
 
-    // --- Demo data ---
+    // Data
     const cases = [
       {
         id: "case1",
         tag: "styrke",
         title: "Fra sporadisk trening til struktur (8 uker)",
         subtitle: "Mål: mer styrke + mer energi i hverdagen",
+        beforeImage: "assets/C1.jpeg",
+        afterImage: "assets/C2.jpeg",
         highlights: {
           "Utgangspunkt": "Trent litt her og der, ingen progresjon.",
           "Fokus": "Knebøy/markløft + enkel plan 3 økter/uke.",
@@ -321,6 +353,8 @@
         tag: "smertefri",
         title: "Smertefri rygg med smartere belastning",
         subtitle: "Mål: trene uten å trigge rygg/nakke",
+        beforeImage: "assets/cases/case2-before.jpg",
+        afterImage: "assets/cases/case2-after.jpg",
         highlights: {
           "Utgangspunkt": "Stiv rygg, vondt etter jobb + trening.",
           "Fokus": "Hofte/rygg-kontroll, tempo, progressiv opptrapping.",
@@ -333,6 +367,8 @@
         tag: "kondis",
         title: "Bedre kondis uten å kræsje styrken",
         subtitle: "Mål: bedre form + holde styrke",
+        beforeImage: "assets/cases/case3-before.jpg",
+        afterImage: "assets/cases/case3-after.jpg",
         highlights: {
           "Utgangspunkt": "Litt for mye løping -> slitne bein.",
           "Fokus": "2 korte intervalløkter + 3 styrkeøkter.",
@@ -345,6 +381,8 @@
         tag: "vekttap",
         title: "Vektnedgang med vaner som varer",
         subtitle: "Mål: ned i fettprosent uten ekstremdiett",
+        beforeImage: "assets/cases/case4-before.jpg",
+        afterImage: "assets/cases/case4-after.jpg",
         highlights: {
           "Utgangspunkt": "Jojo, lite plan og mye stress.",
           "Fokus": "Protein, skritt, 3 styrkeøkter/uke.",
@@ -359,25 +397,8 @@
     const modalTitle = document.getElementById("modalTitle");
     const modalSubtitle = document.getElementById("modalSubtitle");
     const modalKv = document.getElementById("modalKv");
-
-    let activeFilter = "all";
-
-    function render(){
-      grid.innerHTML = cases
-        .filter(c => activeFilter === "all" ? true : c.tag === activeFilter)
-        .map(c => `
-          <article class="card caseCard" data-open="${c.id}">
-            <div class="caseMedia">Legg inn bilde: assets/cases/${c.id}.jpg</div>
-            <div class="caseMeta">
-              <span class="pillTag">${labelFor(c.tag)}</span>
-              <span class="muted small">${c.subtitle}</span>
-            </div>
-            <h3 class="caseTitle">${c.title}</h3>
-            <p class="caseText">Klikk for å se fokus, plan og hva som endret seg.</p>
-            <span class="linkbtn" style="margin-top:6px;">Se detaljer →</span>
-          </article>
-        `).join("");
-    }
+    const modalBefore = document.getElementById("modalBefore");
+    const modalAfter = document.getElementById("modalAfter");
 
     function labelFor(tag){
       return ({
@@ -388,12 +409,35 @@
       })[tag] || tag;
     }
 
+    // RENDER: én img per kort + data-before/data-after på wrapper
+    function render(){
+      grid.innerHTML = cases.map(c => `
+        <article class="card caseCard" data-open="${c.id}">
+          <div class="caseMedia" data-before="${c.beforeImage}" data-after="${c.afterImage}" data-state="before">
+            <img src="${c.beforeImage}" alt="Før" class="caseImg" />
+            <button class="baToggle" type="button" aria-label="Bytt mellom før og etter">Se etter →</button>
+          </div>
+
+          <div class="caseMeta">
+            <span class="pillTag">${labelFor(c.tag)}</span>
+            <span class="muted small">${c.subtitle}</span>
+          </div>
+          <h3 class="caseTitle">${c.title}</h3>
+          <p class="caseText">Klikk for å se fokus, plan og hva som endret seg.</p>
+          <span class="linkbtn" style="margin-top:6px;">Se detaljer →</span>
+        </article>
+      `).join("");
+    }
+
     function openModal(caseId){
       const c = cases.find(x => x.id === caseId);
       if(!c) return;
 
       modalTitle.textContent = c.title;
       modalSubtitle.textContent = c.subtitle;
+
+      modalBefore.src = c.beforeImage;
+      modalAfter.src = c.afterImage;
 
       modalKv.innerHTML = Object.entries(c.highlights).map(([k,v]) => `
         <div class="row">
@@ -414,9 +458,38 @@
     }
 
     document.addEventListener("click", (e) => {
+      // Toggle før/etter (kun bytte src)
+      const toggle = e.target.closest(".baToggle");
+      if (toggle) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const media = toggle.closest(".caseMedia");
+        const img = media.querySelector(".caseImg");
+
+        const beforeSrc = media.getAttribute("data-before");
+        const afterSrc  = media.getAttribute("data-after");
+        const state = media.getAttribute("data-state");
+
+        if (state === "before") {
+          img.src = afterSrc;
+          img.alt = "Etter";
+          media.setAttribute("data-state", "after");
+          toggle.textContent = "← Se før";
+        } else {
+          img.src = beforeSrc;
+          img.alt = "Før";
+          media.setAttribute("data-state", "before");
+          toggle.textContent = "Se etter →";
+        }
+        return;
+      }
+
+      // Åpne modal
       const openBtn = e.target.closest("[data-open]");
       if(openBtn) openModal(openBtn.getAttribute("data-open"));
 
+      // Lukk modal
       const closeBtn = e.target.closest("[data-close]");
       if(closeBtn) closeModal();
     });
@@ -425,23 +498,12 @@
       if(e.key === "Escape") closeModal();
     });
 
-    // Filters
-    document.querySelectorAll("[data-filter]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        activeFilter = btn.getAttribute("data-filter");
-        document.querySelectorAll(".chip").forEach(x => x.classList.remove("isActive"));
-        btn.classList.add("isActive");
-        render();
-      });
-    });
-
     render();
   </script>
 
-      <!-- Footer -->
+  <!-- Footer fra index (om du vil beholde den identisk) -->
   <footer class="siteFooter" id="footer">
     <div class="container footerGrid">
-
       <div class="footerCol footerBrand">
         <div class="footerLogo">
           <span class="brand__name">MICHAEL HUSE</span><span class="brand__sub">PT</span>
@@ -498,7 +560,6 @@
             src="https://www.google.com/maps?q=Oslo&output=embed"></iframe>
         </div>
       </div>
-
     </div>
   </footer>
 </body>

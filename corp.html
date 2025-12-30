@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bedrift • Michael Huse PT</title>
+  <meta name="description" content="Trening og helse for bedrifter: gruppetimer, helseveiledning og treningsprogrammer til ansatte." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .serviceCtaRow{
+      margin-top: 12px;
+      display:flex;
+      justify-content:flex-start;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .serviceLink{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:700;
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#fff;
+      opacity:.95;
+    }
+    .serviceLink:hover{opacity:1}
+
+    .kpis{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .kpi{
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.10);
+      padding: 14px 14px;
+      color: rgba(255,255,255,.92);
+      backdrop-filter: blur(8px);
+    }
+    .kpi strong{ display:block; font-size: 1.1rem; letter-spacing:.02em; }
+    .kpi span{ display:block; margin-top: 4px; font-size: .92rem; opacity:.92; }
+
+    .steps{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .stepNum{
+      width:34px;height:34px;border-radius:999px;
+      display:inline-flex;align-items:center;justify-content:center;
+      font-weight:900;
+      border:1px solid var(--border);
+      background: rgba(111,143,141,.10);
+      margin-bottom: 10px;
+    }
+
+    .faq details{
+      border:1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .faq summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+    }
+    .faq summary::-webkit-details-marker{ display:none; }
+    .faq details + details{ margin-top: 12px; }
+    .faq p{ margin: 10px 0 0; color: var(--muted); line-height:1.7; }
+
+    /* ==========================
+       ✅ NEW: Image sections
+       ========================== */
+
+    .imageGrid{
+      display:grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .imgCard{
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(25,40,40,.12);
+      background:#fff;
+      box-shadow: 0 20px 40px rgba(0,0,0,.08);
+      position:relative;
+      min-height: 220px;
+    }
+    .imgCard img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+    .imgCaption{
+      position:absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(10, 15, 15, .45);
+      border: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      font-weight: 700;
+      font-size: .95rem;
+    }
+    .imgSpan6{ grid-column: span 6; }
+    .imgSpan4{ grid-column: span 4; }
+    .imgSpan8{ grid-column: span 8; }
+
+    /* Case block with image + text */
+    .caseGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: stretch;
+      margin-top: 18px;
+    }
+    .casePhoto{
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid rgba(25,40,40,.12);
+      background:#fff;
+      box-shadow: 0 20px 40px rgba(0,0,0,.08);
+      min-height: 320px;
+    }
+    .casePhoto img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+    @media (max-width: 900px){
+      .kpis{ grid-template-columns: 1fr; }
+      .steps{ grid-template-columns: 1fr; }
+      .imageGrid{ grid-template-columns: repeat(6, minmax(0,1fr)); }
+      .imgSpan6{ grid-column: span 6; }
+      .imgSpan4{ grid-column: span 6; }
+      .imgSpan8{ grid-column: span 6; }
+      .caseGrid{ grid-template-columns: 1fr; }
+      .casePhoto{ min-height: 260px; }
+      .imgCard{ min-height: 200px; }
+    }
+  </style>
+</head>
+
+<body class="pageBg">
+
+  <div class="topstrip">
+    <a class="topstrip__link" href="#kontakt">
+      <span class="dot" aria-hidden="true"></span>
+      Kontakt for bedriftsavtale
+    </a>
+  </div>
+
+  <header class="header" id="top">
+    <div class="container header__inner">
+      <a class="brand" href="index.html#top" aria-label="Hjem">
+        <span class="brand__name">MICHAEL HUSE</span><span class="brand__sub">PT</span>
+      </a>
+
+      <button class="navbtn" id="navBtn" aria-label="Åpne meny" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+       <nav class="nav" id="nav">
+        <a href="#services">Planer</a>
+        <a href="cases.html">Kundehistorier</a>
+        <a href="#about">Om meg</a>
+        <a href="#about">For faste kunder</a>
+        <a href="corp.html">Bedrift</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero" aria-label="Bedrift hero">
+      <div class="hero__media" aria-hidden="true"
+           style="background-image:url('assets/bedrift-header.jpeg'); /* ← BYTT HERO-BILDE HER */"></div>
+      <div class="hero__overlay" aria-hidden="true"></div>
+
+      <div class="container hero__content">
+        <div class="heroPanel">
+          <h1>
+            Trening på jobb. <span class="script">Mindre smerter.</span> Mer energi.
+          </h1>
+          <p class="lead">
+            Skreddersydde tjenester for bedrifter: gruppetimer, helseveiledning og treningsprogrammer
+            som faktisk blir gjennomført — med struktur og lav terskel.
+          </p>
+<div class="hero__cta">
+  <a class="btn btn--primaryHero" href="#kontakt" style="color: black;" >
+ Be om tilbud </a>
+<a class="btn btn--ghost" href="#tjenester">
+    Se tjenester</a>
+</div>
+
+
+          <div class="kpis" aria-label="Nøkkelpoeng">
+            <div class="kpi">
+              <strong>30–45 min</strong>
+              <span>Effektive økter i arbeidstiden</span>
+            </div>
+            <div class="kpi">
+              <strong>På kontor / digitalt</strong>
+              <span>Fleksibel gjennomføring</span>
+            </div>
+            <div class="kpi">
+              <strong>For alle nivå</strong>
+              <span>Tilpasset både nybegynnere og aktive</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bedriftstjenester -->
+    <section class="section section--alt" id="tjenester">
+      <div class="container">
+        <div class="section__head">
+          <h2>Bedriftstjenester</h2>
+          <p class="muted">
+            Velg en løsning som passer hverdagen deres. Jeg kan levere alt fra én pilotøkt til faste avtaler.
+          </p>
+        </div>
+
+        <div class="grid grid--3">
+          <article class="card">
+            <h3>Gruppetimer på arbeidsplassen</h3>
+            <ul class="list">
+              <li>Mobilitet, styrke og «kontor-kropp»-forebygging</li>
+              <li>Null/low-sweat eller mer intensivt (etter ønske)</li>
+              <li>Minimal rigg – kan gjøres i møterom</li>
+            </ul>
+            <div class="serviceCtaRow">
+              <a class="serviceLink" href="#kontakt">Be om pris →</a>
+            </div>
+          </article>
+
+          <article class="card card--featured">
+            <h3>Helseveiledning / workshop</h3>
+            <ul class="list">
+              <li>Stress, søvn, vaner og energi i hverdagen</li>
+              <li>Praktiske verktøy ansatte faktisk bruker</li>
+              <li>Kan kombineres med økt samme dag</li>
+            </ul>
+            <div class="serviceCtaRow">
+              <a class="serviceLink" href="#kontakt">Planlegg workshop →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Treningsprogram til ansatte</h3>
+            <ul class="list">
+              <li>Program tilpasset mål, nivå og tilgjengelig tid</li>
+              <li>Oppfølging: ukentlig/annenhver uke</li>
+              <li>Kan leveres via app / PDF / felles opplegg</li>
+            </ul>
+            <div class="serviceCtaRow">
+              <a class="serviceLink" href="#kontakt">Få forslag →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ✅ NEW: Bilder fra økter -->
+    <section class="section" id="bilder">
+      <div class="container">
+        <div class="section__head">
+          <h2>Bilder fra økter</h2>
+          <p class="muted">
+            Et inntrykk av hvordan dette kan se ut i praksis — på kontor, i møterom eller i treningsrom.
+          </p>
+        </div>
+
+        <!-- Image grid -->
+        <div class="imageGrid" aria-label="Bildegalleri">
+          <figure class="imgCard imgSpan8">
+            <img src="assets/gruppetime.lavterske.jpg" alt="Gruppetime på arbeidsplass"> <!-- ← BYTT BILDE -->
+            <figcaption class="imgCaption">Gruppetime – lav terskel</figcaption>
+          </figure>
+
+          <figure class="imgCard imgSpan4">
+            <img src="assets/mobilitet.jpeg" alt="Mobilitet og aktivering"> <!-- ← BYTT BILDE -->
+            <figcaption class="imgCaption">Mobilitet & aktivering</figcaption>
+          </figure>
+
+          <figure class="imgCard imgSpan4">
+            <img src="assets/bedrift-3.jpg" alt="Workshop om søvn og stress"> <!-- ← BYTT BILDE -->
+            <figcaption class="imgCaption">Workshop – søvn & stress</figcaption>
+          </figure>
+
+          <figure class="imgCard imgSpan4">
+            <img src="assets/bedrift-4.jpg" alt="Styrkeøvelse med strikk"> <!-- ← BYTT BILDE -->
+            <figcaption class="imgCaption">Styrke uten utstyr</figcaption>
+          </figure>
+
+          <figure class="imgCard imgSpan4">
+            <img src="assets/bedrift-5.jpg" alt="Enkel økt i møterom"> <!-- ← BYTT BILDE -->
+            <figcaption class="imgCaption">Kan gjøres i møterom</figcaption>
+          </figure>
+        </div>
+
+        <!-- Optional: case block -->
+        <div class="caseGrid" style="margin-top:18px;">
+          <div class="casePhoto">
+            <img src="assets/bedrift-case.jpg" alt="Bedriftsøkt i praksis"> <!-- ← BYTT BILDE -->
+          </div>
+          <article class="card">
+            <h3>Hva bedrifter liker best</h3>
+            <ul class="list">
+              <li>Lav terskel → høyere oppmøte</li>
+              <li>Fokus på rygg/nakke/hofter (kontorplager)</li>
+              <li>Øvelser som føles “enkle”, men gir effekt</li>
+              <li>Enkel rapportering og justering underveis</li>
+            </ul>
+            <div class="serviceCtaRow">
+              <a class="serviceLink" href="#kontakt">Få et forslag →</a>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Opplegg -->
+    <section class="section" id="opplegg">
+      <div class="container">
+        <div class="section__head">
+          <h2>Slik fungerer et bedriftsopplegg</h2>
+          <p class="muted">
+            Enkelt å komme i gang, enkelt å holde i gang.
+          </p>
+        </div>
+
+        <div class="steps">
+          <article class="card">
+            <div class="stepNum" aria-hidden="true">1</div>
+            <h3>Kartlegging</h3>
+            <p class="muted" style="margin:0;line-height:1.7;">
+              Vi avklarer mål, rammer, nivå og logistikk (tidspunkt, rom, utstyr, intensitet).
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="stepNum" aria-hidden="true">2</div>
+            <h3>Pilot / oppstart</h3>
+            <p class="muted" style="margin:0;line-height:1.7;">
+              En eller flere pilotøkter. Jeg samler tilbakemeldinger og justerer opplegget.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="stepNum" aria-hidden="true">3</div>
+            <h3>Fast rutine</h3>
+            <p class="muted" style="margin:0;line-height:1.7;">
+              Faste økter + enkel rapportering: oppmøte, trivsel og progresjon (hvis ønskelig).
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section__head">
+          <h2>FAQ</h2>
+          <p class="muted">De vanligste spørsmålene fra bedrifter.</p>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>Trenger vi utstyr?</summary>
+            <p>
+              Ikke nødvendigvis. Jeg kan levere økter som kun krever gulvplass. Med strikker/matter blir det enda bedre,
+              men vi tilpasser etter det dere har.
+            </p>
+          </details>
+
+          <details>
+            <summary>Passer dette for ansatte som ikke trener?</summary>
+            <p>
+              Ja. Opplegget bygges med lav terskel, tydelige alternativer og progresjon. Målet er at flere kan delta –
+              ikke at alle skal «maxe».
+            </p>
+          </details>
+
+          <details>
+            <summary>Kan dere få “svettefri” trening?</summary>
+            <p>
+              Ja. Vi kan kjøre mobilitet, aktivering, styrke og holdningsarbeid med lav intensitet. Ønsker dere mer trøkk,
+              tilpasser vi det.
+            </p>
+          </details>
+
+          <details>
+            <summary>Kan dette kombineres med individuell oppfølging?</summary>
+            <p>
+              Absolutt. Mange bedrifter kombinerer gruppetimer med enkelte PT-timer eller egne programmer til ansatte.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kontakt -->
+    <section class="section section--alt" id="kontakt">
+      <div class="container">
+        <div class="section__head">
+          <h2>Kontakt</h2>
+          <p class="muted">Send en kort beskrivelse — så svarer jeg med forslag og pris.</p>
+        </div>
+
+        <div class="grid" style="grid-template-columns: 1.1fr .9fr; gap: 16px;">
+          <article class="card">
+            <h3>Hva ønsker dere?</h3>
+            <ul class="list">
+              <li>Antall ansatte (ca.)</li>
+              <li>Lokasjon (kontor / digitalt)</li>
+              <li>Frekvens (1x/uke, 2x/uke, osv.)</li>
+              <li>Intensitet (svettefri / middels / hard)</li>
+            </ul>
+
+            <div class="serviceCtaRow">
+              <a class="serviceLink" href="mailto:michael@dittdomene.no?subject=Bedriftsavtale%20-%20foresp%C3%B8rsel&body=Hei%20Michael%2C%0A%0AVi%20%C3%B8nsker%20et%20bedriftsopplegg.%0A%0A%2A%20Antall%20ansatte%3A%20%0A%2A%20Lokasjon%3A%20%0A%2A%20Frekvens%3A%20%0A%2A%20M%C3%A5l%3A%20%0A%2A%20Intensitet%3A%20%0A%0AHilsen%2C%0A">
+                Send e-post →</a>
+              <a class="serviceLink" href="index.html#services">Se privat-tjenester →</a>
+            </div>
+          </article>
+
+          <aside class="card">
+            <h3>Rask respons</h3>
+            <p class="muted" style="margin:0;line-height:1.7;">
+              Jeg svarer vanligvis innen 24–48 timer. Ønsker dere en rask avklaring, send antall ansatte + ønsket opplegg.
+            </p>
+            <div class="serviceCtaRow">
+              <a class="serviceLink" href="mailto:michael@dittdomene.no">michael@dittdomene.no →</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="siteFooter" id="footer">
+    <div class="container footerGrid">
+
+      <div class="footerCol footerBrand">
+        <div class="footerLogo">
+          MICHAEL HUSE<span style="opacity:.7">PT</span>
+        </div>
+
+        <p class="footerText">
+          Bedrift, privat eller online — jeg hjelper folk å trene smartere og få bedre resultater.
+        </p>
+
+        <p class="footerCopy">© <span id="year"></span> Michael Huse</p>
+      </div>
+
+      <div class="footerCol">
+        <h4>MENY</h4>
+        <ul>
+          <li><a href="#tjenester">Bedriftstjenester</a></li>
+          <li><a href="#bilder">Bilder</a></li>
+          <li><a href="#opplegg">Opplegg</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="index.html">Til forsiden</a></li>
+        </ul>
+      </div>
+
+      <div class="footerCol">
+        <h4>KONTAKT</h4>
+        <ul>
+          <li><a href="mailto:michael@dittdomene.no">michael@dittdomene.no</a></li>
+          <li><a href="https://instagram.com/DITTBRUKERNAVN" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://tiktok.com/@DITTBRUKERNAVN" target="_blank" rel="noopener">TikTok</a></li>
+        </ul>
+      </div>
+
+      <div class="footerCol">
+        <h4>STED</h4>
+        <p class="footerText" style="margin:0;">
+          Oslo + online. Kan også leveres på deres lokasjon etter avtale.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const navBtn = document.getElementById("navBtn");
+    const nav = document.getElementById("nav");
+    navBtn?.addEventListener("click", () => {
+      const open = nav.classList.toggle("isOpen");
+      navBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  </script>
+</body>
+</html>
